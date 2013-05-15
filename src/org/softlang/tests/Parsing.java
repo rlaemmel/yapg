@@ -11,18 +11,18 @@ import org.softlang.company.CompanyParser;
 public class Parsing {
 
 	private static String posSample =
-		"inputs" + File.separator + "sample.Company";
+		".." + File.separator + "inputs" + File.separator + "sample.Company";
 	private static String negSample =
-		"inputs" + File.separator + "nonSample.Company";
+		".." + File.separator + "inputs" + File.separator + "nonSample.Company";
 	
 	private static void parse(String s) throws IOException, RecognitionException {
 		FileInputStream stream = new FileInputStream(s);
-        ANTLRInputStream antlr = new ANTLRInputStream(stream);
-        CompanyLexer lexer = new CompanyLexer(antlr);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        CompanyParser parser = new CompanyParser(tokens);
-        parser.parseCompany();
-        if (parser.error) throw new RecognitionException();
+		ANTLRInputStream antlr = new ANTLRInputStream(stream);
+		CompanyLexer lexer = new CompanyLexer(antlr);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		CompanyParser parser = new CompanyParser(tokens);
+		parser.parseCompany();
+		if (parser.error) throw new RecognitionException();
 	}
 	
 	@Test

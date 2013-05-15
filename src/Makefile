@@ -3,10 +3,16 @@
 # A suitable version of ANTLR is included into the repository.
 #
 
-cp = ".:../antlr-3.2.jar"
+cp = ".:../jars/antlr-3.2.jar:../jars/junit-4.11.jar:../jars/hamcrest-core-1.3.jar"
+java = java -cp ${cp}
 javac = javac -cp ${cp}
 antlr = java -cp ${cp} org.antlr.Tool
 yapg = java -cp ${cp} org.softlang.yapg.Tool
+
+# Build and test everything but bootstrapping
+all:
+	make build
+	make test-company
 
 # Build the YAPG tool, test it for "101"
 build:
@@ -46,6 +52,11 @@ antlr-company:
 # Compile classes of 101companies System
 compile-company:
 	${javac} org/softlang/company/*.java
+	${javac} org/softlang/tests/*.java
+
+# Test parser of 101companies System
+test-company:
+	${java} org.junit.runner.JUnitCore org.softlang.tests.Parsing
 
 # Remove all files that can be derived
 clean:
@@ -55,6 +66,7 @@ clean:
 # Remove all files of 101companies implementation that can be derived
 clean-company:
 	rm -f org/softlang/company/*.class
+	rm -f org/softlang/tests/*.class
 	rm -f org/softlang/company/*.g
 	rm -f org/softlang/company/*.java
 	rm -rf org/softlang/company/*.tokens
