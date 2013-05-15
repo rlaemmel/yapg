@@ -1,4 +1,7 @@
-yapg
-====
+This is an implementation of the 101companies System.
 
-A contribution to 101companies: A parser generator (generator)
+Headline: An ANTLR-based generator for text-to-object mappings
+
+Documentation: http://101companies.org/wiki/Contribution:yapg
+
+Build instructions: src/Makefile
