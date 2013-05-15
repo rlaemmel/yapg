@@ -1,6 +1,8 @@
 #
 # This code should work on *nix systems with Java SDK 6+.
-# A suitable version of ANTLR is included into the repository.
+# Run "make download" to resolve dependencies (download jars).
+# Run "make" to build YAPG and the 101 example.
+# Run "make bootstrap" to rebuild YAPG with itself.
 #
 
 cp = ".:../jars/antlr-3.2.jar:../jars/junit-4.11.jar:../jars/hamcrest-core-1.3.jar"
@@ -13,6 +15,12 @@ yapg = java -cp ${cp} org.softlang.yapg.Tool
 all:
 	make build
 	make test-company
+
+# Download all jars from Maven repo
+download:
+	curl http://repo1.maven.org/maven2/org/antlr/antlr/3.2/antlr-3.2.jar -o jars/antlr-3.2.jar
+	curl http://repo1.maven.org/maven2/junit/junit/4.11/junit-4.11.jar -o jars/junit-4.11.jar
+	curl http://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar -o jars/hamcrest-core-1.3.jar
 
 # Build the YAPG tool, test it for "101"
 build:
