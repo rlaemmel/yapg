@@ -1,1 +1,11 @@
 *.class
+jars/*.jar
+src/org/softlang/company/Company.g
+src/org/softlang/company/Company.java
+src/org/softlang/company/CompanyLexer.java
+src/org/softlang/company/CompanyParser.java
+src/org/softlang/company/Department.java
+src/org/softlang/company/Employee.java
+src/org/softlang/company/NonManager.java
+src/org/softlang/grammar/GrammarLexer.java
+

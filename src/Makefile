@@ -5,7 +5,7 @@
 # Run "make bootstrap" to rebuild YAPG with itself.
 #
 
-cp = ".:../jars/antlr-3.2.jar:../jars/junit-4.11.jar:../jars/hamcrest-core-1.3.jar"
+cp = ".:../jars/antlr-3.2.jar:../jars/antlr-runtime-3.2.jar:../jars/junit-4.11.jar:../jars/hamcrest-core-1.3.jar"
 java = java -cp ${cp}
 javac = javac -cp ${cp}
 antlr = java -cp ${cp} org.antlr.Tool
@@ -18,9 +18,12 @@ all:
 
 # Download all jars from Maven repo
 download:
-	curl http://repo1.maven.org/maven2/org/antlr/antlr/3.2/antlr-3.2.jar -o jars/antlr-3.2.jar
-	curl http://repo1.maven.org/maven2/junit/junit/4.11/junit-4.11.jar -o jars/junit-4.11.jar
-	curl http://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar -o jars/hamcrest-core-1.3.jar
+	cd ..; \
+	mkdir -p jars; \
+	cd jars; \
+	curl http://www.antlr3.org/download/antlr-3.2.jar -o antlr-3.2.jar; \
+	curl http://repo1.maven.org/maven2/junit/junit/4.11/junit-4.11.jar -o junit-4.11.jar; \
+	curl http://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar -o hamcrest-core-1.3.jar
 
 # Build the YAPG tool, test it for "101"
 build:
@@ -81,6 +84,7 @@ clean-company:
 
 # Remove all files of YAPG implementation that can be derived
 clean-yapg:
+	rm -rf ../jars
 	rm -f org/softlang/grammar/*.class
 	rm -f org/softlang/yapg/*.class
 	rm -f org/softlang/grammar/GrammarLexer.java
